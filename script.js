@@ -29,7 +29,7 @@ const handleSearchEvent = () => {
     renderEmptyAlert()
   } else {
     clearList();
-  fetchCurrency(currencyValue);
+    fetchCurrency(currencyValue);
   }
 }
 
@@ -79,21 +79,4 @@ const renderRate = (key, value) => {
   li.innerHTML = `<b>${key}:</b> ${formattedValue}`;
 
   currencyList.appendChild(li);
-}
-
-
-
-const func = () => {
-  // ...
-  // ..
-  try {
-    funcThatCanThrow();
-  } catch (error) {
-    //
-  }
-  
-}
-
-const funcThatCanThrow = () => {
-  return new Error("deu ruim");
 }
