@@ -12,12 +12,27 @@
   </header>
 
   <section class="main-section">
-    <label for="currency-input">Digite a moeda:</label>
-    <input type="text" placeholder="USD" id="currency-input">
-    <button id="search-button">Pesquisar</button>
-    <ul id="currency-list"></ul>
+    <select id="main-currency-options" class="currency-options">
+    </select>
+    <input
+      type="number"
+      id="main-currency-place"
+      class="currency-place"
+      placeholder="digite o valor aqui"
+      min="1.00"
+      step="0.01"
+    >
+    <select id="secondary-currency-options" class="currency-options">
+    </select>
+    <input
+      type="text"
+      id="secondary-currency-place"
+      class="currency-place"
+      placeholder="Valor convertido"
+      disabled
+    >
   </section>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
