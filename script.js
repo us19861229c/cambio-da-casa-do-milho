@@ -5,9 +5,9 @@ const apiInfo = {
 
 const url = `${apiInfo.api}${apiInfo.endpoint}`
 
-
 window.onload = () => {
-  setupEventHandlers();  
+  setupEventHandlers(); 
+  fetchAllCurrencies();
 }
 
 const setupEventHandlers = () => {
@@ -42,20 +42,20 @@ const clearList = () => {
   currencyList.innerHTML = '';
 }
 
-const fetchCurrency = (currency) => {
-  const endpoint = `${url}?base=${currency}`;
+const fetchAllCurrencies = _ => {
 
-  fetch(endpoint)
+  fetch(url)
     .then((response) => response.json())
     .then((object) => {
-      console.log(object);
-      if (object.error) {
-        throw new Error(object.error);
-      } else {
-        handleRates(object.rates);
-      }
+      const allCurrenciesRates = object.rates
+      const allCurrenciesNames = Object.keys(allCurrenciesRates)
+      allCurrenciesNames.forEach((currencyName) => {
+        const selectMainCurrency = document.querySelector('#main-currency-options');
+        const selectReturnCurrency = document.querySelector('#secondary-currency-options')
+        selectOptionCurrencies(currencyName, selectMainCurrency);
+        selectOptionCurrencies(currencyName, selectReturnCurrency)
+      })
     })
-    .catch((error) => handleError(error))
 }
 
 const handleError = (errorMessage) => {
@@ -79,4 +79,74 @@ const renderRate = (key, value) => {
   li.innerHTML = `<b>${key}:</b> ${formattedValue}`;
 
   currencyList.appendChild(li);
+}
+//
+
+
+// const fetchCurrency = (currency) => {
+//   const endpoint = `${url}?base=${currency}`;
+
+//   fetch(endpoint)
+//     .then((response) => response.json())
+//     .then((object) => {
+//       console.log(object);
+//       if (object.error) {
+//         throw new Error(object.error);
+//       } else {
+//         handleRates(object.rates);
+//       }
+//     })
+//     .catch((error) => handleError(error))
+// }
+const selectOptionCurrencies = (key, selectCurrency) => {
+  const optionCurrency = document.createElement('option');
+  if (key === 'BRL') {
+    optionCurrency.selected === true
+  }
+  optionCurrency.value = `${key}`
+  optionCurrency.innerHTML = ` ${nameRates[key][0]} | ${key} (${nameRates[key][1]})`
+  selectCurrency.appendChild(optionCurrency)
+}
+
+// const inputPlaceMainValue = document.getElementById("main-currency-place")
+// let selectedCurrencyAcronym = 'teste'
+// inputPlaceMainValue.addEventListener('click', () => {
+//   inputPlaceMainValue.placeholder = `${selectedCurrencyAcronym}`
+// })
+
+// A ideia é criar um objeto onde se possa buscar o significado do acrônimo,
+// e a bandeira de cada país respectivamente
+nameRates = {
+  'GBP': ['🇬🇧','Great Britain Pound'],
+  'HKD': ['🇭🇰','Hong Kong Dollar'],
+  'IDR': ['🇮🇩','Indonesia Rupiah'],
+  'ILS': ['🇮🇱','Israel New Shekel'],
+  'DKK': ['🇩🇰','Denmark Krone'],
+  'INR': ['🇮🇳','India Rupee'],
+  'CHF': ['🇨🇭','Switzerland Franc'],
+  'MXN': ['🇲🇽','Mexico Peso'],
+  'CZK': ['🇨🇿','Czech Koruna'],
+  'SGD': ['🇸🇬','Singapore Dollar'],
+  'THB': ['🇹🇭','Thailand Baht'],
+  'HRK': ['🇭🇷','Croatia Kuna'],
+  'MYR': ['🇲🇾','Malaysia Ringgit'],
+  'NOK': ['🇳🇴','Norway Kroner'],
+  'CNY': ['🇨🇳','China Yuan/Renminbi'],
+  'BGN': ['🇧🇬','Bulgaria Lev'],
+  'PHP': ['🇵🇭','Philippines Peso'],
+  'SEK': ['🇸🇪','Sweden Krona'],
+  'PLN': ['🇵🇱','Poland Zloty'],
+  'ZAR': ['🇿🇦','South Africa Rand'],
+  'CAD': ['🇨🇦','Canada Dollar'],
+  'ISK': ['🇮🇸','Iceland Krona'],
+  'BRL': ['🇧🇷','Brazil Real'],
+  'RON': ['🇷🇴','Romania New Lei'],
+  'NZD': ['🇳🇿','New Zealand Dollar'],
+  'TRY': ['🇹🇷','Turkish New Lira'],
+  'JPY': ['🇯🇵','Japan Yen'],
+  'RUB': ['🇷🇺','Russia Rouble'],
+  'KRW': ['🇰🇷','South Korea Won'],
+  'USD': ['🇺🇸','USA Dolar'],
+  'HUF': ['🇭🇺','Hungary Forint'],
+  'AUD': ['🇦🇺','Australia Dollar']
 }

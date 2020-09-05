@@ -62,3 +62,51 @@ li:nth-child(even) {
   font-weight: 800;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/* Para remover as setas nas laterais*/
+/*
+Encontrei essas informações aqui : 
+https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
+Mas não saberia explicar elas, se precisasse. 
+*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/*Para renover o foco do seletor e do input text*/
+/*
+Encontrei essas informações aqui : 
+https://www.tutorialrepublic.com/faq/how-to-remove-outline-around-text-input-boxes-in-chrome-using-css.php
+Mas não saberia explicar elas, se precisasse.
+*/
+input:focus, select:focus{
+  outline: none;
+}
+.currency-options {
+  background-color: white;
+  border: none;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 10px 5px;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.currency-place {
+  background-color: white;
+  border: transparent;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: rgba(0, 0, 0, .6);
+  font-size: 2rem;
+  position: relative;
+  padding: 120px 0;
+  top: -11px;
+
+}
